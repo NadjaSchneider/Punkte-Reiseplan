@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wohin bringen dich deine Punkte? – @frompointstoparadise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#06145F;--navy-deep:#040d3d;--blue:#0B36C7;--blue-bright:#2e5bff;
+    --ice:#eaf0ff;--mute:#9fb0e6;--line:rgba(160,180,255,.16);
+    --glass:rgba(255,255,255,.045);--glass-bd:rgba(160,180,255,.22)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%}
+  body{font-family:'DM Sans',system-ui,sans-serif;color:var(--ice);background:var(--navy-deep);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  .bg{position:fixed;inset:0;z-index:-2;pointer-events:none;
+    background:radial-gradient(1100px 700px at 78% -8%,rgba(46,91,255,.35),transparent 60%),radial-gradient(900px 600px at 8% 108%,rgba(11,54,199,.45),transparent 55%),linear-gradient(160deg,#06145F 0%,#040d3d 60%,#03081f 100%)}
+  .bg::after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:42px 42px;mask:radial-gradient(1200px 800px at 50% 30%,#000,transparent 75%);opacity:.6}
+  .wrap{max-width:560px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:36px 22px 40px}
+  .card{position:relative;z-index:1;background:var(--glass);border:1px solid var(--glass-bd);border-radius:26px;padding:34px 26px;backdrop-filter:blur(14px);box-shadow:0 30px 80px -30px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.06)}
+  .eyebrow{font-family:'League Spartan';letter-spacing:.22em;text-transform:uppercase;font-size:11px;font-weight:700;color:var(--blue-bright);margin-bottom:18px}
+  h1{font-family:'League Spartan';font-weight:800;line-height:.98;font-size:clamp(34px,8.5vw,46px);letter-spacing:-.01em;margin-bottom:14px}
+  h1 .grad{background:linear-gradient(100deg,#fff,#8fb0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .serif{font-family:'Cormorant Garamond';font-style:italic;font-weight:500;color:#cdd9ff;font-size:clamp(18px,4.6vw,22px);line-height:1.35}
+  .lede{color:var(--mute);font-size:15.5px;line-height:1.6;margin:16px 0 28px}
+  .btn{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;font-family:'League Spartan';font-weight:700;font-size:16px;letter-spacing:.02em;color:#fff;border:none;cursor:pointer;padding:17px 22px;border-radius:15px;text-decoration:none;background:linear-gradient(100deg,var(--blue),var(--blue-bright));box-shadow:0 14px 34px -10px rgba(46,91,255,.7);transition:transform .15s,box-shadow .2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 20px 44px -10px rgba(46,91,255,.85)}
+  .btn:active{transform:translateY(0)}
+  .btn.ghost{background:transparent;border:1px solid var(--glass-bd);box-shadow:none;color:var(--ice);font-size:14px;padding:13px}
+  .meta{display:flex;gap:16px;margin-top:20px;color:var(--mute);font-size:12.5px;flex-wrap:wrap}
+  .meta span{display:flex;align-items:center;gap:6px}
+  .dot{width:5px;height:5px;border-radius:50%;background:var(--blue-bright)}
+  .prog{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+  .prog .lbl{font-family:'League Spartan';font-weight:700;font-size:12px;letter-spacing:.12em;color:var(--mute);text-transform:uppercase}
+  .bar{height:5px;border-radius:99px;background:rgba(255,255,255,.08);flex:1;margin-left:14px;overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--blue-bright))}
+  .q{font-family:'League Spartan';font-weight:700;font-size:clamp(22px,5.4vw,27px);line-height:1.12;margin-bottom:6px}
+  .qsub{color:var(--mute);font-size:14px;margin-bottom:24px;line-height:1.5}
+  .opts{display:flex;flex-direction:column;gap:11px}
+  .opt{position:relative;z-index:1;text-align:left;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:16px 18px;color:var(--ice);font-size:15.5px;font-weight:500;cursor:pointer;transition:.16s;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .opt:hover{border-color:var(--blue-bright);background:rgba(46,91,255,.12);transform:translateX(3px)}
+  .opt small{display:block;color:var(--mute);font-size:12.5px;font-weight:400;margin-top:3px}
+  .opt .chev{color:var(--blue-bright);opacity:.5;font-size:18px}
+  .amt{font-family:'League Spartan';font-weight:800;font-size:46px;text-align:center;margin:6px 0 2px}
+  .amt span{font-size:24px;color:var(--mute)}
+  .amtnote{text-align:center;color:var(--mute);font-size:13px;margin-bottom:26px}
+  input[type=range]{-webkit-appearance:none;width:100%;height:7px;border-radius:99px;background:linear-gradient(90deg,var(--blue-bright) var(--p,40%),rgba(255,255,255,.12) var(--p,40%));outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:5px solid var(--blue-bright);cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+  input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:5px solid var(--blue-bright);cursor:pointer}
+  .ticks{display:flex;justify-content:space-between;color:var(--mute);font-size:11px;margin-top:10px}
+  .resrow{display:flex;gap:12px;margin:4px 0 6px}
+  .stat{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:16px;padding:16px}
+  .stat .k{color:var(--mute);font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;font-family:'League Spartan';font-weight:700}
+  .stat .v{font-family:'League Spartan';font-weight:800;font-size:30px;margin-top:6px}
+  .stat.hi{border-color:var(--blue-bright);background:linear-gradient(160deg,rgba(46,91,255,.18),rgba(46,91,255,.04))}
+  .stat.hi .v{color:#fff}
+  .lever{background:rgba(46,91,255,.12);border:1px solid var(--glass-bd);border-radius:14px;padding:15px 17px;margin:18px 0;font-size:14.5px;line-height:1.55}
+  .lever b{color:#bcd0ff}
+  .ladder{margin:20px 0 6px;display:flex;flex-direction:column}
+  .step{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+  .step:last-child{border-bottom:none}
+  .step .n{flex:none;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'League Spartan';font-weight:800;font-size:13px;background:rgba(46,91,255,.18);border:1px solid var(--glass-bd);color:#bcd0ff}
+  .step.dream .n{background:linear-gradient(120deg,var(--blue),var(--blue-bright));color:#fff;border:none}
+  .step .t b{font-family:'League Spartan';font-size:15px}
+  .step .t small{display:block;color:var(--mute);font-size:13px;margin-top:3px;line-height:1.5}
+  .step .t .tag{display:inline-block;margin-top:6px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#bcd0ff;border:1px solid var(--glass-bd);border-radius:6px;padding:2px 7px;font-family:'League Spartan';font-weight:700}
+  .cta-box{margin-top:24px;text-align:center}
+  .cta-box .serif{margin-bottom:16px;display:block}
+  .step-screen{display:none;animation:in .45s cubic-bezier(.2,.7,.2,1)}
+  .step-screen.active{display:block}
+  @keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .footer{text-align:center;color:var(--mute);font-size:11px;margin-top:22px;letter-spacing:.04em;line-height:1.5}
+  .legal{text-align:center;margin:16px auto 0;display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+  .legal a{color:var(--mute);font-size:12px;text-decoration:none;letter-spacing:.03em}
+  .legal a:hover{color:var(--ice);text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="wrap">
+  <div class="card">
+
+    <div class="step-screen active" id="s-intro">
+      <div class="eyebrow">@frompointstoparadise · Punkte-Reiseplan</div>
+      <h1>Wohin bringen dich <span class="grad">deine Punkte?</span></h1>
+      <p class="serif">„8.000 € für Asien ist eh utopisch." Vielleicht. Vielleicht ist dein Wocheneinkauf aber der erste Schritt dahin.</p>
+      <p class="lede">In 60 Sekunden zeige ich dir – ehrlich, ohne Fantasiezahlen – wie viel deine ganz normalen Einkäufe pro Jahr wert sind. Und was mit System daraus wird.</p>
+      <button class="btn" data-go="q1">Punkte-Check starten →</button>
+      <div class="meta"><span><i class="dot"></i> 60 Sekunden</span><span><i class="dot"></i> 4 Fragen</span><span><i class="dot"></i> ehrlich gerechnet</span></div>
+    </div>
+
+    <div class="step-screen" id="s-q1">
+      <div class="prog"><span class="lbl">Frage 1/4</span><div class="bar"><i style="width:25%"></i></div></div>
+      <div class="q">Was gibst du pro Woche für Einkäufe aus?</div>
+      <div class="qsub">Lebensmittel, Drogerie, Tanken – alles, was regelmäßig anfällt.</div>
+      <div class="amt"><span>€</span> <span id="amtVal">100</span></div>
+      <div class="amtnote">ungefähr reicht völlig</div>
+      <input type="range" id="spend" min="40" max="300" step="10" value="100">
+      <div class="ticks"><span>40 €</span><span>170 €</span><span>300 €+</span></div>
+      <button class="btn" style="margin-top:26px" data-go="q2">Weiter →</button>
+    </div>
+
+    <div class="step-screen" id="s-q2">
+      <div class="prog"><span class="lbl">Frage 2/4</span><div class="bar"><i style="width:50%"></i></div></div>
+      <div class="q">Kaufst du bei Payback-Partnern?</div>
+      <div class="qsub">dm, Edeka, Netto, Aral, Rewe-Lieferung … zählt alles.</div>
+      <div class="opts">
+        <button class="opt" data-key="partner" data-val="0.7" data-next="q3"><span>Ja, regelmäßig<small>Ich achte schon darauf</small></span><span class="chev">›</span></button>
+        <button class="opt" data-key="partner" data-val="0.45" data-next="q3"><span>Manchmal<small>Mal so, mal so</small></span><span class="chev">›</span></button>
+        <button class="opt" data-key="partner" data-val="0.2" data-next="q3"><span>Selten<small>Eigentlich kaum</small></span><span class="chev">›</span></button>
+      </div>
+      <button class="btn ghost" style="margin-top:16px" data-go="q1">← Zurück</button>
+    </div>
+
+    <div class="step-screen" id="s-q3">
+      <div class="prog"><span class="lbl">Frage 3/4</span><div class="bar"><i style="width:75%"></i></div></div>
+      <div class="q">Nutzt du die Coupons in der App?</div>
+      <div class="qsub">Die 5-fach, 10-fach, 15-fach Punkte-Coupons.</div>
+      <div class="opts">
+        <button class="opt" data-key="coupon" data-val="2.4" data-next="q4"><span>Immer<small>Aktiviere ich vor jedem Einkauf</small></span><span class="chev">›</span></button>
+        <button class="opt" data-key="coupon" data-val="1.6" data-next="q4"><span>Manchmal<small>Wenn ich dran denke</small></span><span class="chev">›</span></button>
+        <button class="opt" data-key="coupon" data-val="1.0" data-next="q4"><span>Nie<small>Hab ich nie gemacht</small></span><span class="chev">›</span></button>
+      </div>
+      <button class="btn ghost" style="margin-top:16px" data-go="q2">← Zurück</button>
+    </div>
+
+    <div class="step-screen" id="s-q4">
+      <div class="prog"><span class="lbl">Frage 4/4</span><div class="bar"><i style="width:100%"></i></div></div>
+      <div class="q">Wie viele Erwachsene leben im Haushalt?</div>
+      <div class="qsub">Zwei Karten sammeln fast doppelt – das zählt mit.</div>
+      <div class="opts">
+        <button class="opt" data-key="adults" data-val="1.0" data-next="result"><span>Eine/r<small>Ich sammle allein</small></span><span class="chev">›</span></button>
+        <button class="opt" data-key="adults" data-val="1.65" data-next="result"><span>Zwei<small>Partner/in lebt mit hier</small></span><span class="chev">›</span></button>
+      </div>
+      <button class="btn ghost" style="margin-top:16px" data-go="q3">← Zurück</button>
+    </div>
+
+    <div class="step-screen" id="s-result">
+      <div class="eyebrow">Dein Punkte-Reiseplan</div>
+      <div class="q" style="margin-bottom:18px">Das steckt in deinem Einkauf.</div>
+      <div class="resrow">
+        <div class="stat"><div class="k">So wie jetzt</div><div class="v" id="vNow">–</div></div>
+        <div class="stat hi"><div class="k">Mit System</div><div class="v" id="vPot">–</div></div>
+      </div>
+      <p class="qsub" style="margin-top:10px" id="resReason">–</p>
+      <div class="lever" id="cumul" style="background:linear-gradient(160deg,rgba(46,91,255,.22),rgba(46,91,255,.05));text-align:center;font-size:16px">–</div>
+      <div id="milesBox" style="background:linear-gradient(135deg,rgba(11,54,199,.4),rgba(46,91,255,.14));border:1px solid var(--blue-bright);border-radius:16px;padding:18px;margin:14px 0;text-align:center">
+        <div style="font-family:'League Spartan';font-weight:700;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#bcd0ff">In Meilen umgewandelt</div>
+        <div id="milesVal" style="font-family:'League Spartan';font-weight:800;font-size:36px;margin:6px 0 2px;line-height:1">–</div>
+        <div id="milesSub" style="color:var(--mute);font-size:13px;line-height:1.5">–</div>
+      </div>
+      <div class="lever" id="proof" style="font-size:13.5px;background:rgba(255,255,255,.05)">–</div>
+      <div class="lever" id="lever">–</div>
+      <div class="q" style="font-size:19px;margin:6px 0 4px">Wohin dich „Mit System" bringt:</div>
+      <div class="ladder">
+        <div class="step"><div class="n">1</div><div class="t"><b>Dieses Jahr</b><small id="lad1">–</small></div></div>
+        <div class="step"><div class="n">2</div><div class="t"><b>In 1–2 Jahren</b><small id="lad2">–</small></div></div>
+        <div class="step dream"><div class="n">★</div><div class="t"><b>Die große Familienreise</b><small>Der Sprung von „Geld zurück" zu echten Flügen läuft über Punkte → Meilen. Das System von @frompointstoparadise ist dein Fundament – das Reise-Level kommt danach.</small><span class="tag">Meilen-Level</span></div></div>
+      </div>
+      <div class="cta-box">
+        <span class="serif">Aus „irgendwann" wird „wir fangen jetzt an."</span>
+        <a class="btn" href="https://www.pointstoparadise.de/p/warteliste" target="_blank" rel="noopener">Platz auf der Warteliste sichern →</a>
+        <button class="btn ghost" style="margin-top:12px" id="resetBtn">Nochmal rechnen</button>
+      </div>
+      <div class="footer">Schätzung „mit System" inkl. größerer Anschaffungen übers System · Meilen mit 25%-Transferbonus (Payback bietet ihn regelmäßig an) · echte Zahlen variieren</div>
+    </div>
+
+  </div>
+  <div class="legal">
+    <a href="https://www.pointstoparadise.de/legal/194830326/contact" target="_blank" rel="noopener">Impressum & Datenschutz</a>
+    <a href="https://www.pointstoparadise.de/legal/194830326/tos" target="_blank" rel="noopener">AGB</a>
+  </div>
+</div>
+
+<script>
+var S={spend:100,partner:null,coupon:null,adults:null};
+var BASE_RATE=0.005;
+function go(id){
+  var all=document.querySelectorAll('.step-screen');
+  for(var i=0;i<all.length;i++) all[i].classList.remove('active');
+  document.getElementById('s-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function updSpend(el){
+  S.spend=+el.value;
+  document.getElementById('amtVal').textContent=S.spend>=300?'300+':S.spend;
+  el.style.setProperty('--p',((el.value-el.min)/(el.max-el.min)*100)+'%');
+}
+function calc(){
+  var wk=S.spend*52;
+  var now=wk*S.partner*BASE_RATE*S.coupon*S.adults;
+  var recurring=wk*0.9*BASE_RATE*3.2*1.5*1.15*S.adults;
+  var bigticket=300*S.adults;
+  return {now:Math.round(now), pot:Math.round(recurring+bigticket)};
+}
+function ladderText(y){
+  if(y<120) return ['mehrere Tankfüllungen oder Wocheneinkäufe – geschenkt.','ein Wellness-Tag oder der erste echte Reise-Baustein.'];
+  if(y<250) return ['ein Wellness-Tag oder ein dicker Reise-Baustein.','ein verlängertes Wochenende mit der Familie.'];
+  if(y<450) return ['ein verlängertes Wochenende oder ein Städtetrip.','ein Wochenend-Trip plus Extra-Budget – jedes Jahr.'];
+  return ['ein solider Urlaubs-Baustein für die ganze Familie.','jedes Jahr ein fester Reise-Topf, ohne mehr auszugeben.'];
+}
+function leverText(){
+  if(S.coupon===1.0) return '<b>Dein größter Hebel: die Coupons.</b> Du verschenkst sie gerade komplett – fast geschenktes Geld, ohne einen Cent mehr auszugeben.';
+  if(S.partner===0.2) return '<b>Dein größter Hebel: wo du kaufst.</b> Du nutzt Payback-Partner noch selten. Schon kleine Umstellungen verdoppeln dein Konto.';
+  if(S.coupon===1.6) return '<b>Dein größter Hebel: Coupons konsequent statt manchmal.</b> Das ist der Unterschied zwischen nett und lohnt sich richtig.';
+  return '<b>Du machst schon einiges richtig.</b> Dein Hebel liegt im System: Coupons kombinieren statt einzeln nutzen – da liegt das Mehrfache drin.';
+}
+function showResult(){
+  var r=calc();
+  document.getElementById('vNow').textContent=r.now+' €';
+  document.getElementById('vPot').textContent=r.pot+' €';
+  var pot3=Math.round(r.pot*3/10)*10;
+  document.getElementById('resReason').textContent='Heute holst du ca. '+r.now+' € pro Jahr raus. Mit System sind ca. '+r.pot+' € pro Jahr drin – inklusive größerer Anschaffungen (Technik, Reise, Gutscheine), die eh anfallen, klug übers System geroutet. Gleiches Geld, nur klüger.';
+  document.getElementById('cumul').innerHTML='Über 3 Jahre: rund <b>'+pot3+' €</b> – ohne einen Cent mehr auszugeben.';
+  var pts=Math.round(r.pot*100);
+  var miles=Math.round(r.pot*100*1.25/1000)*1000;
+  document.getElementById('milesVal').textContent=miles.toLocaleString('de-DE')+' Meilen';
+  document.getElementById('milesSub').innerHTML='aus ca. '+pts.toLocaleString('de-DE')+' Punkten/Jahr – mit dem 25%-Transferbonus zu Miles & More. Ein echter Baustein Richtung Familienreise.';
+  document.getElementById('proof').innerHTML='<b>Echtes Beispiel:</b> Nadja hat mit genau diesem System in 4 Monaten 80.000 Punkte gesammelt – das sind 800 € oder rund 100.000 Meilen mit Bonus.';
+  document.getElementById('lever').innerHTML=leverText();
+  var lad=ladderText(r.pot);
+  document.getElementById('lad1').textContent='Rund '+r.pot+' € Gegenwert – das sind '+lad[0];
+  document.getElementById('lad2').textContent=lad[1];
+  go('result');
+}
+document.addEventListener('DOMContentLoaded',init);
+if(document.readyState!=='loading') init();
+function init(){
+  var nav=document.querySelectorAll('[data-go]');
+  for(var i=0;i<nav.length;i++){(function(b){b.addEventListener('click',function(){go(b.dataset.go);});})(nav[i]);}
+  var opts=document.querySelectorAll('.opt');
+  for(var j=0;j<opts.length;j++){(function(b){b.addEventListener('click',function(){
+    S[b.dataset.key]=+b.dataset.val;
+    b.style.borderColor='#2e5bff';b.style.background='rgba(46,91,255,.18)';
+    setTimeout(function(){ if(b.dataset.next==='result'){showResult();} else {go(b.dataset.next);} },140);
+  });})(opts[j]);}
+  var sp=document.getElementById('spend');
+  sp.addEventListener('input',function(){updSpend(sp);});updSpend(sp);
+  document.getElementById('resetBtn').addEventListener('click',function(){location.reload();});
+}
+</script>
+</body>
+</html>
